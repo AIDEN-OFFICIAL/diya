@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // For React navigation
 import "./Home.css";
 import useSound from 'use-sound';
-import song from "/audio/diyamu.aac" 
+import song from "../public/audio/diyamu.aac" 
 
 const Home = () => {
 

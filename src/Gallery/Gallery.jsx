@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import "./Gallery.css";
-import pic1 from '/images/pic1.jpg'
-import pic2 from '/images/pic2.jpg'
-import pic3 from '/images/pic3.jpg'
-import pic4 from '/images/pic4.jpg'
-import pic5 from '/images/pic5.jpg'
-import pic6 from '/images/pic6.jpg'
-import pic7 from '/images/pic7.jpg'
-import pic8 from '/images/pic8.jpg'
-import pic10 from '/images/pic10.jpg'
-import pic11 from '/images/pic11.jpg'
+import pic1 from '../public/images/pic1.jpeg'
+import pic2 from '../public/images/pic2.jpeg'
+import pic3 from '../public/images/pic3.jpeg'
+import pic4 from '../public/images/pic4.jpeg'
+import pic5 from '../public/images/pic5.jpeg'
+import pic6 from '../public/images/pic6.jpeg'
+import pic7 from '../public/images/pic7.jpeg'
+import pic8 from '../public/images/pic8.jpeg'
+import pic10 from '../public/images/pic9.jpeg'
+import pic11 from '../public/images/pic10.jpeg'
 const Gallery = () => {
 
 

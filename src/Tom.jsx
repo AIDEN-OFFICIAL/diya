@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import giffy from "/images/giphy.gif"
+import giffy from "./public/images/giphy.gif"
 const Tom = () => {
 
     const [popup,setPopup] = useState(false)

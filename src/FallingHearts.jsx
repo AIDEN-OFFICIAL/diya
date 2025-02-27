@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Tom from "./Tom";
 import useSound from 'use-sound';
-import song from "/audio/aiden-firstPage.mp3" 
+import song from "./public/audio/aiden-firstPage.mp3" 
 const FallingHearts = () => {
   const hearts = new Array(15).fill(0); // Generate 20 hearts
   const kisses = new Array(5).fill(0);
