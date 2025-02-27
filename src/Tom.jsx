@@ -16,14 +16,14 @@ const Tom = () => {
     },[])
 
     const submit=()=>{
-        if(value!=="june27"){
+        if(value.toLowerCase()!=="june27"){
             setValue("try Once more...")
             setTimeout(()=>{
                 setValue("")
             },2000)
         }
 
-        if(value==="june27"){
+        if(value.toLowerCase()==="june27"){
             navigate('/home',{state:{isValueCorrect:true}})
         }
     }

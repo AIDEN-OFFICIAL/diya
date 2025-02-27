@@ -14,24 +14,10 @@ const Gallery = () => {
 
 
   useEffect(() => {
-    function createStars() {
-      const starsContainer = document.querySelector('.stars');
-      if (!starsContainer) return; // Prevent null reference
-      for (let i = 0; i < 200; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.width = Math.random() * 3 + 'px';
-        star.style.height = star.style.width;
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 2 + 's';
-        starsContainer.appendChild(star);
-      }
-    }
-
     function createGallery() {
       const gallery = document.querySelector('.gallery');
-      if (!gallery) return; // Prevent null reference
+      if (!gallery) return;
+      
       const totalCards = 10;
       const radius = window.innerWidth < 768 ? 400 : 600;
       let currentAngle = 0;
@@ -42,11 +28,8 @@ const Gallery = () => {
       const prevButton = document.querySelector('.nav-button.prev');
       const nextButton = document.querySelector('.nav-button.next');
       
-      const imageUrls = [
-        pic1, pic2, pic3, pic4, pic5,
-        pic6, pic7, pic8, pic10, pic11
-      ];
-      
+      const imageUrls = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic10, pic11];
+  
       for (let i = 0; i < totalCards; i++) {
         const card = document.createElement('div');
         card.className = 'card';
@@ -54,12 +37,7 @@ const Gallery = () => {
                           <div class="number">${i + 1}</div>`;
         gallery.appendChild(card);
       }
-
-      function rotateGallery(direction) {
-        currentAngle += direction * 36;
-        updateCards();
-      }
-
+  
       function updateCards() {
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
@@ -71,17 +49,68 @@ const Gallery = () => {
           card.style.transform = `translate3d(${x}px, 0, ${z}px) rotateY(${rotateY}deg)`;
         });
       }
-
+  
+      function rotateGallery(direction) {
+        currentAngle += direction * 36;
+        updateCards();
+      }
+  
       prevButton.addEventListener('click', () => rotateGallery(1));
       nextButton.addEventListener('click', () => rotateGallery(-1));
+  
+      // Mouse drag events
+      gallery.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        currentX = currentAngle;
+        gallery.style.cursor = 'grabbing';
+      });
+  
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const diff = (e.clientX - startX) * 0.5;
+        currentAngle = currentX + diff;
+        updateCards();
+      });
+  
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+        gallery.style.cursor = 'grab';
+      });
+  
+      // Touch events
+      gallery.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        currentX = currentAngle;
+        e.preventDefault();
+      }, { passive: false });
+  
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const diff = (e.touches[0].clientX - startX) * 0.5;
+        currentAngle = currentX + diff;
+        updateCards();
+      }, { passive: false });
+  
+      window.addEventListener('touchend', () => {
+        isDragging = false;
+      });
+  
+      // Fix scrolling issue
+      window.addEventListener('wheel', (e) => {
+        const delta = e.deltaX * 0.1 || e.deltaY * 0.1;
+        currentAngle += delta;
+        updateCards();
+        e.preventDefault();  // Prevents default page scrolling
+      }, { passive: false });
+  
       updateCards();
     }
-
-    createStars();
+  
     createGallery();
-
-  }, []); // Runs only once after the component mounts
-
+  }, []);
+  
   return (
     <div className="gallery-body">
       <div className="ambient-light"></div>
